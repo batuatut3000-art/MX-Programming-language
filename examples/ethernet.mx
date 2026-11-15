@@ -1,0 +1,11 @@
+[uefi]
+clear(rgb(10,18,32))
+text class"title"(30,30,"mxEthernet adapters",rgb(255,255,255))
+Adapters = ethernet_scan()
+print(Adapters)
+if Adapters > 0:
+    Address = ethernet_mac(0)
+    Link = ethernet_link(0)
+    print(Address)
+    print(Link)
+ethernet_manager()

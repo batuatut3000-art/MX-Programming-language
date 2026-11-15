@@ -1,0 +1,92 @@
+[uefi]
+clear(rgb(10,18,32))
+mouse(dpi=1600)
+
+# kakaOS desktop and apps, written in MXPL.
+rect class"topbar"(0%,0%,100%,48,rgb(29,47,77),radius(0px))
+text class"brand"(24,16,"kakaOS 0.8",rgb(240,246,255))
+text class"desktoplabel"(760,16,"UEFI desktop",rgb(170,204,255))
+rect class"powerbutton"(944,9,60,30,rgb(170,50,60),radius(8px))
+text class"powerlabel"(951,16,"POWER",rgb(255,255,255))
+
+rect class"dock"(24,82,148,560,rgb(25,41,68),radius(14px))
+rect class"shellicon"(46,112,100,70,rgb(30,100,255),radius(12px))
+text class"shellname"(55,189,"MX shell",rgb(245,245,255))
+rect class"wifiicon"(46,225,100,70,rgb(43,160,135),radius(12px))
+text class"wifiname"(72,302,"Wi-Fi",rgb(245,245,255))
+rect class"webicon"(46,338,100,70,rgb(96,92,190),radius(12px))
+text class"webname"(65,415,"Browser",rgb(245,245,255))
+rect class"etherneticon"(46,451,100,70,rgb(180,108,50),radius(12px))
+text class"ethernetname"(56,528,"Ethernet",rgb(245,245,255))
+
+rect class"window"(205,82,710,450,rgb(20,32,52),radius(16px))
+rect class"titlebar"(205,82,710,42,rgb(37,67,111),radius(16px))
+rect class"closebutton"(868,91,31,25,rgb(190,57,71),radius(6px))
+text class"closelabel"(880,96,"X",rgb(255,255,255))
+text class"windowtitle"(228,95,"kakaOS / MX programming language",rgb(255,255,255))
+text class"instructions"(230,153,"Commands: help web wifi ethernet bin memory shutdown",rgb(178,205,240))
+text class"status"(230,178,"Ready. Press Enter after a command.",rgb(145,220,180))
+rect class"button"(265,320,160,72,rgb(30,100,255),radius(20px))
+print class"button"(308x,347y"KAKA")
+
+while True:
+    Command = poll_input("KAKA> ")
+    if click("shellicon"):
+        show("window")
+        show("titlebar")
+        show("closebutton")
+        show("closelabel")
+        show("windowtitle")
+        show("instructions")
+        show("status")
+        show("button")
+    if click("closebutton"):
+        hide("window")
+        hide("titlebar")
+        hide("closebutton")
+        hide("closelabel")
+        hide("windowtitle")
+        hide("instructions")
+        hide("status")
+        hide("button")
+    if click("wifiicon"):
+        wifi_manager()
+    if click("etherneticon"):
+        ethernet_manager()
+    if click("webicon"):
+        Url = input("URL> ")
+        if Url:
+            browser(Url)
+    if click("powerbutton"):
+        shutdown()
+    if click("button"):
+        animate("button",200x,300ms)
+        animate("button",-200x,300ms)
+    if Command:
+        if Command == help:
+            print("help web wifi ethernet scan bin memory shutdown")
+        elif Command == web:
+            Url = input("URL> ")
+            if Url:
+                browser(Url)
+        elif Command == wifi:
+            wifi_manager()
+        elif Command == ethernet:
+            ethernet_manager()
+        elif Command == scan:
+            Networks = wifi_scan()
+            print(Networks)
+        elif Command == bin:
+            Result = runbin("HELLO.BIN")
+            print(Result)
+        elif Command == memory:
+            Buffer = alloc(16)
+            if Buffer:
+                poke8(Buffer,42)
+                Value = peek8(Buffer)
+                print(Value)
+                free(Buffer)
+        elif Command == shutdown:
+            shutdown()
+        else:
+            print("Unknown command. Type help")

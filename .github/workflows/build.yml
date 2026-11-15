@@ -1,0 +1,54 @@
+name: Build MXPL
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install build tools
+        run: sudo apt-get update && sudo apt-get install -y clang lld python3
+      - name: Compile example OS
+        run: bash compile.sh main.mx
+      - name: Run native checks
+        run: bash scripts/test.sh
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: mx-main-linux
+          path: build/main.iso
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Install LLVM and LLD
+        run: brew install llvm lld
+      - name: Compile example OS
+        run: bash compile.sh main.mx
+      - name: Run native checks
+        run: bash scripts/test.sh
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: mx-main-macos
+          path: build/main.iso
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Compile example OS
+        shell: pwsh
+        run: .\compile.ps1 main.mx
+      - name: Upload ISO
+        uses: actions/upload-artifact@v4
+        with:
+          name: mx-main-windows
+          path: build/main.iso

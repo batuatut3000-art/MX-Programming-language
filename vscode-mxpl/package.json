@@ -1,0 +1,13 @@
+{
+  "name": "mxpl-language",
+  "displayName": "MXPL Language",
+  "description": "Syntax highlighting for MXPL .mx files",
+  "version": "0.0.5",
+  "publisher": "mxpl-local",
+  "engines": { "vscode": "^1.80.0" },
+  "categories": ["Programming Languages"],
+  "contributes": {
+    "languages": [{ "id": "mxpl", "aliases": ["MXPL", "MX"], "extensions": [".mx"], "configuration": "./language-configuration.json" }],
+    "grammars": [{ "language": "mxpl", "scopeName": "source.mxpl", "path": "./syntaxes/mxpl.tmLanguage.json" }]
+  }
+}

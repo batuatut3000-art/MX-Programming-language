@@ -1,0 +1,14 @@
+[uefi]
+clear(rgb(12,20,35))
+mouse(dpi=1600)
+rect class"button"(20%,20%,40%,12%,rgb(30,100,255),radius(10%))
+text class"hint"(20%,15%,"Click to run HELLO.BIN",rgb(255,255,255))
+
+while True:
+    Command = poll_input("MX> ")
+    if click("button"):
+        Result = runbin("HELLO.BIN")
+        if Result == 42:
+            print("Binary returned 42")
+    if Command == web:
+        browser("http://example.com/")

@@ -1,0 +1,12 @@
+build/
+__pycache__/
+*.pyc
+*.iso
+*.exe
+*.obj
+*.o
+.env
+
+MX.zip
+
+MX.zip

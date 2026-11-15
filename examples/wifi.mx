@@ -1,0 +1,10 @@
+[uefi]
+clear(rgb(10,18,32))
+mouse(dpi=1600)
+text class"title"(40,40,"kakaOS Wi-Fi example",rgb(255,255,255))
+rect class"open"(40,90,240,70,rgb(43,160,135),radius(12px))
+print class"open"(70,116,"Find Wi-Fi networks")
+
+while True:
+    if click("open"):
+        wifi_manager()

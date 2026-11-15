@@ -1,0 +1,15 @@
+[uefi]
+clear(rgb(10,18,32))
+text class"title"(40,40,"Wi-Fi API",rgb(255,255,255))
+
+Count = wifi_scan()
+if Count > 0:
+    Network = wifi_ssid(0)
+    Password = password_input("Password> ")
+    Result = wifi_connect(Network, Password)
+    if Result == 0:
+        print("Connected")
+    else:
+        print("Connection failed")
+else:
+    print("No Wi-Fi network or UEFI driver")

@@ -1,0 +1,15 @@
+{
+  "name": "MXPL",
+  "scopeName": "source.mxpl",
+  "patterns": [
+    { "name": "comment.line.number-sign.mxpl", "match": "#.*$" },
+    { "name": "keyword.control.mxpl", "match": "\\b(?:def|while|if|elif|else|True|False)\\b" },
+    { "name": "storage.type.mxpl", "match": "\\b(?:rect|text|class|radius|rgb)\\b" },
+    { "name": "keyword.other.mxpl", "match": "\\bprint(?=\\s+class\\b)" },
+    { "name": "support.function.mxpl", "match": "\\b(?:animate|move|mouse|click|key|clear|hide|show|shutdown|print|input|poll_input|password_input|browser|runbin|wifi_manager|wifi_scan|wifi_count|wifi_ssid|wifi_quality|wifi_connect|ethernet_manager|ethernet_scan|ethernet_count|ethernet_mac|ethernet_link|ethernet_open|ethernet_send|ethernet_receive|ethernet_close|peek8|peek16|peek32|poke8|poke16|poke32|in8|out8|sleep|alloc|free)\\b(?=\\s*\\()" },
+    { "name": "variable.parameter.mxpl", "match": "\\bdpi\\b(?=\\s*=)" },
+    { "name": "meta.preprocessor.mxpl", "match": "\\[(?:uefi)\\]|__C__:" },
+    { "name": "constant.numeric.mxpl", "match": "(?<!\\w)-?(?:0[xX][0-9a-fA-F]+|0[bB][01]+|\\d+)(?:px|ms|x|y|%)?(?!\\w)" },
+    { "name": "string.quoted.double.mxpl", "begin": "\"", "end": "\"", "patterns": [{ "name": "constant.character.escape.mxpl", "match": "\\\\." }] }
+  ]
+}
