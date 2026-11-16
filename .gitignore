@@ -1,12 +1,8 @@
 build/
 __pycache__/
 *.pyc
+*.o
+*.obj
 *.iso
 *.exe
-*.obj
-*.o
 .env
-
-MX.zip
-
-MX.zip

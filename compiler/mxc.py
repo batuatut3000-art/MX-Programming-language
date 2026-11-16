@@ -131,6 +131,10 @@ while source_pos < len(raw_lines):
     for prefix in ("print", "rect"):
         if statement.startswith(prefix + "('class") and statement.endswith("')"):
             statement = prefix + " " + statement[len(prefix)+2:-2]
+    for kind in ("rect", "text"):
+        plain = re.fullmatch(rf'{kind}\((.*)\)', statement)
+        if plain:
+            statement = f'{kind} class"__mx_{kind}_{index}"({plain[1]})'
     lines.append((indent, index, statement))
 if not lines or lines[0][2] != "[uefi]" or lines[0][0]:
     fail(1, "first statement must be [uefi]")

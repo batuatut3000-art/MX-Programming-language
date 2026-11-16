@@ -13,4 +13,6 @@ while True:
 
 Indent blocks with four spaces. Positions can use pixels (`px`, `x`, `y`) or screen percentages (`%`). `mouse(dpi=...)` changes cursor speed. `browser("http://example.com/")` opens the small firmware browser; its JavaScript support is limited. `runbin("path")` executes an x86-64 flat binary in the UEFI process and should be used only with trusted code.
 
+For a simple drawing, `rect(100,100,250,100,rgb(30,100,255))` and `text(120,130,"Hello MX!",rgb(255,255,255))` work without a class name. The compiler creates internal names for these objects; use `class"name"` when you need `click`, `show`, `hide`, or `animate`.
+
 See `README.md` for the detailed syntax and runtime limitations.
